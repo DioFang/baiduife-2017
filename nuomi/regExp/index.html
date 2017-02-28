@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>regExp</title>
+	</head>
+
+	<body>
+
+		<style type="text/css">
+			input {
+				outline: none;
+				padding: 10px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				width: 500px;
+			}
+			
+			.msg {
+				color: green;
+				display: none;
+			}
+			
+			.error {
+				border: 1px solid red;
+			}
+			
+			.success {
+				border: 1px solid green;
+			}
+			
+			.show {
+				display: inline-block;
+			}
+			
+			.hide {
+				display: none;
+			}
+		</style>
+
+		<div>
+			<input type="text" placeholder="请输入电话号码" id="phone" /> <span class="msg">ok</span>
+		</div>
+		<br/>
+		<div>
+			<input type="text" placeholder="请输入单词" id="words" /> <span class="msg">ok</span>
+		</div>
+
+		<script type="text/javascript">
+		
+			var id = function(id) {
+				return document.getElementById(id);
+			}
+			
+			var phone = id('phone'),
+				word = id('words');
+
+			var phoneRE = /^0{0,1}(13[0-9]|15[7-9]|153|156|18[7-9])[0-9]{8}$/,
+				wordRE = /\b([a-zA-z]+)\b(\s+\1)+/;
+
+			phone.addEventListener('input', function(event) {
+				var msgEle = event.target.nextElementSibling;
+				var classlist = msgEle.classList;
+				if(phoneRE.test(this.value)) {
+					phone.className = 'success'
+					classlist.remove('hide');
+					classlist.add('show');
+				} else {
+					phone.className = 'error'
+					classlist.remove('show');
+					classlist.add('hide');
+				}
+			})
+
+			word.addEventListener('input', function(event) {
+				var msgEle = event.target.nextElementSibling,
+					classlist = msgEle.classList;
+				if(wordRE.test(this.value)) {
+					word.className = 'success'
+					classlist.remove('hide');
+					classlist.add('show');
+				} else {
+					word.className = 'error'
+					classlist.remove('show');
+					classlist.add('hide');
+				}
+			})
+			
+		</script>
+
+	</body>
+
+</html>
